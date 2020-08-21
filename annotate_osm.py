@@ -28,7 +28,7 @@ def accessible_to_bikes(way) -> bool:
     if "cycleway" in way.tags:
         return True
     if "highway" in way.tags and "bicycle" in way.tags:
-        if way.tags["bicycle"] == "use_sidepath" or way.tags["bicycle"] == "no":
+        if way.tags["bicycle"] == "no":
             return False
         else:
             return True

@@ -16,8 +16,8 @@ function setup()
     properties = {
       u_turn_penalty                = 20,
       traffic_light_penalty         = 2,
-      --weight_name                   = 'cyclability',
-      weight_name                   = 'duration',
+      weight_name                   = 'cyclability',
+      --weight_name                   = 'duration',
       process_call_tagless_node     = false,
       max_speed_for_map_matching    = 110/3.6, -- kmph -> m/s
       use_turn_restrictions         = false,
@@ -597,7 +597,6 @@ function process_way(profile, way, result)
   local data = {
     -- prefetch tags
     highway = way:get_value_by_key('highway'),
-    color = way:get_value_by_key('color'),
 
     route = nil,
     man_made = nil,
@@ -670,21 +669,18 @@ function process_way(profile, way, result)
 
   WayHandlers.run(profile, way, result, data, handlers)
 
-  if data.color
+  local color = way:get_value_by_key('color')
+  if color
   then
-    if data.color == 'black' then
-      result.forward_rate = result.forward_rate * 0.3
-      result.backward_rate = result.backward_rate * 0.3
+    if color == 'black' then
+      result.forward_rate = result.forward_rate * 0.5
+      result.backward_rate = result.backward_rate * 0.5
     end
-    if data.color == 'red' then
-      result.forward_rate = result.forward_rate * 0.6
-      result.backward_rate = result.backward_rate * 0.6
+    if color == 'red' then
+      result.forward_rate = result.forward_rate * 0.7
+      result.backward_rate = result.backward_rate * 0.7
     end
-    if data.color == 'yellow' then
-      result.forward_rate = result.forward_rate * 1.1
-      result.backward_rate = result.backward_rate * 1.1
-    end
-    if data.color == 'green' then
+    if color == 'green' then
       result.forward_rate = result.forward_rate * 1.5
       result.backward_rate = result.backward_rate * 1.5
     end
