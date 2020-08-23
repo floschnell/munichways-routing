@@ -9,7 +9,7 @@ find_access_tag = require("lib/access").find_access_tag
 limit = require("lib/maxspeed").limit
 
 function setup()
-  local default_speed = 15
+  local default_speed = 18
   local walking_speed = 4
 
   return {
@@ -134,8 +134,8 @@ function setup()
       living_street = default_speed,
       road = default_speed,
       service = default_speed,
-      track = 12,
-      path = 12
+      track = 15,
+      path = 15
     },
 
     pedestrian_speeds = {
@@ -176,17 +176,18 @@ function setup()
 
     surface_speeds = {
       asphalt = default_speed,
-      ["cobblestone:flattened"] = 10,
-      paving_stones = 10,
-      compacted = 10,
-      cobblestone = 6,
+      ["cobblestone:flattened"] = 15,
+      paving_stones = 15,
+      compacted = 15,
+      cobblestone = 12,
+      unhewn_cobblestone = 6,
       unpaved = 6,
-      fine_gravel = 6,
+      fine_gravel = 14,
       gravel = 6,
-      pebblestone = 6,
+      pebblestone = 12,
       ground = 6,
-      dirt = 6,
-      earth = 6,
+      dirt = 8,
+      earth = 10,
       grass = 6,
       mud = 3,
       sand = 3,
