@@ -1,6 +1,6 @@
 # munichways - routing
 
-This project uses rated bikepath segments from www.munichways.com to render improved routing data for the OSRM backend.
+This project uses rated bikepath segments from www.munichways.com to render improved routing data for the OSRM backend. A running demo service can be found at https://routing.floschnell.de.
 
 ## comparison
 
