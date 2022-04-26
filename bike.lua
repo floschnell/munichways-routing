@@ -9,7 +9,7 @@ find_access_tag = require("lib/access").find_access_tag
 limit = require("lib/maxspeed").limit
 
 function setup()
-  local default_speed = 18
+  local default_speed = 22
   local walking_speed = 4
 
   return {
@@ -29,9 +29,9 @@ function setup()
     default_speed             = default_speed,
     walking_speed             = walking_speed,
     oneway_handling           = true,
-    turn_penalty              = 6,
+    turn_penalty              = 10,
     turn_bias                 = 1.4,
-    use_public_transport      = true,
+    use_public_transport      = false,
 
     allowed_start_modes = Set {
       mode.cycling,
@@ -176,22 +176,22 @@ function setup()
 
     surface_speeds = {
       asphalt = default_speed,
-      ["cobblestone:flattened"] = 15,
-      paving_stones = 15,
-      compacted = 15,
+      ["cobblestone:flattened"] = 18,
+      compacted = 18,
+      paving_stones = 16,
+      fine_gravel = 14,
+      sett = 14,
+      earth = 13,
       cobblestone = 12,
+      pebblestone = 12,
+      dirt = 8,
       unhewn_cobblestone = 6,
       unpaved = 6,
-      fine_gravel = 14,
       gravel = 6,
-      pebblestone = 12,
       ground = 6,
-      dirt = 8,
-      earth = 10,
       grass = 6,
       mud = 3,
-      sand = 3,
-      sett = 10
+      sand = 3
     },
 
     classes = Sequence {
@@ -670,21 +670,26 @@ function process_way(profile, way, result)
 
   WayHandlers.run(profile, way, result, data, handlers)
 
-  local color = way:get_value_by_key('color')
-  if color
-  then
-    if color == 'black' then
-      result.forward_rate = result.forward_rate * 0.5
-      result.backward_rate = result.backward_rate * 0.5
-    end
-    if color == 'red' then
-      result.forward_rate = result.forward_rate * 0.7
-      result.backward_rate = result.backward_rate * 0.7
-    end
-    if color == 'green' then
-      result.forward_rate = result.forward_rate * 1.5
-      result.backward_rate = result.backward_rate * 1.5
-    end
+  local color = way:get_value_by_key("color")
+  local color_penalty = 0.8
+  if color and color == "black" then
+    color_penalty = 0.3
+  end
+  if color and color == "red" then
+    color_penalty = 0.6
+  end
+  if color and color == "yellow" then
+    color_penalty = 1
+  end
+  if color and color == "green" then
+    color_penalty = 1.2
+  end
+
+  if result.forward_speed > 0 then
+    result.forward_rate = result.forward_speed / 3.6 * color_penalty
+  end
+  if result.backward_speed > 0 then
+    result.backward_rate = result.backward_speed / 3.6 * color_penalty
   end
 end
 

@@ -1,0 +1,6 @@
+{
+    "files.autoSave": "afterDelay",
+    "python.analysis.logLevel": "Trace",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true
+}

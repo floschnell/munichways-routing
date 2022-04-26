@@ -1,0 +1,12 @@
+FROM osrm/osrm-frontend
+
+ENV OSRM_BACKEND='https://routing.floschnell.de'
+ENV OSRM_CENTER='11.57304,48.13266'
+ENV OSRM_ZOOM='13'
+ENV OSRM_LABEL='Fahrrad'
+
+RUN npm install -g http-server
+RUN cp node_modules/leaflet/dist/leaflet.css css/leaflet.css
+COPY leaflet_options.js src/leaflet_options.js
+RUN npm run compile
+CMD http-server --port ${PORT} .

@@ -1,14 +1,12 @@
 import osmium
 import json
-from shapely.geometry import shape, Point, Polygon
+from shapely.geometry import shape, Point
 import shapely.wkb as wkblib
-from typing import List, Optional
+from typing import List
 import shapely
-from shapely.ops import nearest_points, shared_paths
-import geopy.distance
 from shapely.prepared import prep
 from shapely.strtree import STRtree
-from progress.bar import Bar
+from progress.bar import ShadyBar as Bar
 
 wkbfab = osmium.geom.WKBFactory()
 
@@ -73,7 +71,7 @@ class AnnotationHandler(osmium.SimpleHandler):
         self.ways = ways
         self.writer = None
         if not self.test:
-            self.writer = osmium.SimpleWriter("out/out.pbf")
+            self.writer = osmium.SimpleWriter("out/out.pbf") # pylint: disable=no-member
         self.features = list()
         self.processed = 0
         self.stree = stree
@@ -93,7 +91,6 @@ class AnnotationHandler(osmium.SimpleHandler):
                 line = wkblib.loads(wkb, hex=True)
                 colors = dict()
                 for match in self.stree.query(line):
-                    hits = 0
                     for i in range(0, int(line.length * 50000)):
                         coord = line.interpolate(i / 50000.0)
                         if self.ways[match.id].prepared_shape.contains(Point(coord)):
