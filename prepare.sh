@@ -43,7 +43,7 @@ if [ "$SKIP_ANNOTATION" = false ]; then
 
   # create out.pbf and out.geojson
   echo "integrating ratings into OSM data ..."
-  python3 annotate_osm.py
+  docker run -it -v "${PWD}":/a -w /a python:3 python annotate_osm.py
   echo "done."
   echo
 
