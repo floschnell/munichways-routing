@@ -2,10 +2,10 @@
 
 var L = require('leaflet');
 
-var streets = L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
+var osm = L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
     attribution: '© <a href="https://www.openstreetmap.org/copyright/en">OpenStreetMap</a> contributors'
 });
-var cyclosm = L.tileLayer('https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png', {
+var streets = L.tileLayer('https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png', {
     attribution: '© <a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases">CyclOSM</a> contributors'
 });
 
@@ -21,15 +21,15 @@ module.exports = {
     },
     services: [{
         label: 'Fahrrad',
-        path: 'http://localhost:5000/route/v1'
+        path: 'https://www.radlnavi.de'
     }],
     layer: [{
         'Mapbox Streets': streets,
-        'CyclOSM': cyclosm,
+        'OpenStreetMap': osm,
     }],
     overlay: {},
     baselayer: {
         one: streets,
-        two: cyclosm,
+        two: osm,
     }
 };
