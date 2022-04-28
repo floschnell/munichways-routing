@@ -21,7 +21,7 @@ module.exports = {
     },
     services: [{
         label: 'Fahrrad',
-        path: 'https://www.radlnavi.de'
+        path: 'https://www.radlnavi.de/route/v1'
     }],
     layer: [{
         'Mapbox Streets': streets,
