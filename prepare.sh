@@ -33,7 +33,7 @@ if [ "$SKIP_ANNOTATION" = false ]; then
   # get latest annotations
   echo "downloading latest munichways.com ratings ..."
   if [ ! -f ./geo/munichways.json ]; then
-    curl --insecure "https://radwegplanung-muenchen.de/cgi-bin/qgis_mapserv.fcgi?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAME=AnbindungRVNetz,RVSNAlle&outputFormat=application/json" -o geo/munichways.json
+    curl --insecure "https://radwegplanung-muenchen.de/cgi-bin/qgis_mapserv.fcgi?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAME=L33,L27,L22,L16,L10,L5&outputFormat=application/json" -o geo/munichways.json
     sed -i -e 's/"Name"/"name"/g' geo/munichways.json
   else
     echo "skipping since file already present."
