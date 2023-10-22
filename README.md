@@ -1,10 +1,14 @@
 # munichways - routing
 
-This project uses rated bikepath segments from www.munichways.com to render improved routing data for the OSRM backend. A running demo service can be found at https://routing.floschnell.de.
+This project uses rated bikepath segments from www.munichways.de to render improved routing data for the OSRM backend. A running demo service can be found at https://routing.floschnell.de.
+
+## DEPRECATED
+
+This project is deprecated, find a maintained version here: https://github.com/MunichWays/radlnavi
 
 ## comparison
 
-Let's compare existing routing algorithms with the one supported by the munichways.com annotations.
+Let's compare existing routing algorithms with the one supported by the munichways.de annotations.
 
 I chose a route going from Olympiapark to Ostbahnhof and calculated the route via conventional OSM and Google Maps. Eventually, I computed the route with the improved munichways routing.
 
